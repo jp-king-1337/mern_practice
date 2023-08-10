@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "mern_practice",
     "version": "1.0.0",
     "description": "",
@@ -15,3 +16,21 @@
         "concurrently": "^8.2.0"
     }
 }
+=======
+  "name": "mern_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:client": "cd ./client && npm i",
+    "install:server": "cd ./server && npm i",
+    "install": "concurrently \"npm run install:client\" \"npm run install:server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
+>>>>>>> d2cf8b3660b4055a1a139e6bc72caa5e8a95a75d
