@@ -4,12 +4,13 @@ function Landing() {
     const { tasks, setGlobalState } = useStore();
 
     const deleteTask = (index) => {
-        const filtered = tasks.filter((task, i) => i !== index);
+        const copy = [...tasks];
+        copy.splice(index, 1);
 
         setGlobalState(oldState => {
             return {
                 ...oldState,
-                tasks: [...filtered]
+                tasks: [...copy]
             }
         })
     };
