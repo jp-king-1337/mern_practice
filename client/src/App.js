@@ -1,19 +1,19 @@
-import { useStore } from './store';
+import { useStore } from "./store";
 
-import Landing from './pages/Landing';
-import Form from './pages/Form';
+import Landing from "./pages/Landing";
+import Form from "./pages/Form";
 
 
 
 function App() {
-  const { darkMode } = useStore();
+    const { darkMode } = useStore();
 
-  return (
-    <main className={darkMode ? 'dark' : ''} >
-      <Landing />
-      <Form />
-    </main>
-  );
+    return (
+        <main className={darkMode ? "dark" : ""} >
+            <Landing />
+            <Form />
+        </main>
+    );
 }
 
 export default App;

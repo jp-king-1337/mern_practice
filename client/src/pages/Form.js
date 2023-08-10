@@ -1,15 +1,15 @@
-import { useStore } from '../store';
+import { useStore } from "../store";
 
 function Form(props) {
-  const { title } = useStore();
+    const { title } = useStore();
 
-  return (
-    <>
-      <h1>Add a Task</h1>
+    return (
+        <>
+            <h1>Add a Task</h1>
 
-      <p>{title}</p>
-    </>
-  )
+            <p>{title}</p>
+        </>
+    )
 }
 
 export default Form;

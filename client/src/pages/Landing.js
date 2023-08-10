@@ -1,15 +1,4 @@
-<<<<<<< HEAD
-import {useStore } from "../store";
-
-function Landing(props) {
-    return (
-        <>
-            <h1>Task Manager</h1>
-        </>
-    )
-}
-=======
-import { useStore } from '../store';
+import { useStore } from "../store";
 
 function Landing() {
   const { title, setGlobalState } = useStore();
@@ -18,7 +7,7 @@ function Landing() {
     setGlobalState(oldState => {
       return {
         ...oldState,
-        title: 'Something else'
+        title: "Something else"
       }
     });
   };
@@ -48,4 +37,3 @@ function Landing() {
 }
 
 export default Landing;
->>>>>>> d2cf8b3660b4055a1a139e6bc72caa5e8a95a75d
