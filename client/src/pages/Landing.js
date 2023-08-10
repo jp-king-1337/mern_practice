@@ -4,13 +4,12 @@ function Landing() {
     const { tasks, setGlobalState } = useStore();
 
     const deleteTask = (index) => {
-        const copy = [...tasks];
-        copy.splice(index, 1);
+        const filtered = tasks.filter((task, i) => i !== index);
 
         setGlobalState(oldState => {
             return {
                 ...oldState,
-                tasks: [...copy]
+                tasks: [...filtered]
             }
         })
     };
@@ -19,7 +18,7 @@ function Landing() {
         <>
             <h1>Task Manager</h1>
 
-            <div>
+            <div className="tasks">
                 {tasks.map((task, index) => (
                     <div key={index}>
                         <p>Task: {task.text}</p>
