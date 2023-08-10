@@ -1,36 +1,31 @@
 import { useStore } from '../store';
 
 function Landing() {
-  const { title, setGlobalState } = useStore();
+  const { tasks, setGlobalState } = useStore();
 
-  const changeTitle = () => {
+  const deleteTask = (index) => {
+    const filtered = tasks.filter((task, i) => i !== index);
+
     setGlobalState(oldState => {
       return {
         ...oldState,
-        title: 'Something else'
+        tasks: [...filtered]
       }
-    });
-  };
-
-  const toggleDarkMode = () => {
-    setGlobalState(oldState => {
-      return {
-        ...oldState,
-        darkMode: !oldState.darkMode
-      }
-    });
+    })
   };
 
   return (
     <>
       <h1>Task Manager</h1>
 
-      <p>{title}</p>
-
-      <button onClick={changeTitle}>Change</button>
-
-      <div>
-        <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
+      <div className="tasks">
+        {tasks.map((task, index) => (
+          <div key={index}>
+            <p>Task: {task.text}</p>
+            <p>Username: {task.username}</p>
+            <button onClick={() => deleteTask(index)}>Delete</button>
+          </div>
+        ))}
       </div>
     </>
   )
