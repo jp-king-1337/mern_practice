@@ -1,25 +1,7 @@
 import { useReducer } from 'react';
-import { useStore } from '../store';
+import { useStore } from '../../store';
 
-const initial_state = {
-  taskText: '',
-  username: ''
-};
-
-const reducer = (state, actionObj) => {
-  switch (actionObj.type) {
-    case 'UPDATE_USERNAME':
-      return {
-        ...state,
-        username: actionObj.payload
-      };
-    case 'UPDATE_TASK_TEXT':
-      return {
-        ...state,
-        taskText: actionObj.payload
-      }
-  }
-};
+import { reducer, actions, initial_state } from './form_reducer';
 
 function Form() {
   const { setGlobalState } = useStore();
@@ -32,13 +14,13 @@ function Form() {
     switch (prop) {
       case 'username':
         dispatch({
-          type: 'UPDATE_USERNAME',
+          type: actions.UPDATE_USERNAME,
           payload: value
         });
         break;
       case 'taskText':
         dispatch({
-          type: 'UPDATE_TASK_TEXT',
+          type: actions.UPDATE_TASK_TEXT,
           payload: value
         });
         break;
