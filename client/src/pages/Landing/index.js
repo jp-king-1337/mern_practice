@@ -1,17 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
-const GET_TASKS = gql`
-query {
-    getTasks {
-        _id
-        text
-        username
-    }
-}
-`;
+import { GET_TASKS } from "./queries";
 
 export default function Landing() {
-    const { data, error, loading, refetch } = useQuery(GET_TASKS);
+    const { data, error, loading } = useQuery(GET_TASKS);
 
     return (
         <>

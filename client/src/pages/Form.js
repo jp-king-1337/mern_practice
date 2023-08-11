@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 
+import { GET_TASKS } from "./Landing/queries";
+
 const ADD_TASK = gql`
     mutation AddTask($username: String!, $text: String!) {
         addTask(username: $username, text: $text) {
@@ -12,7 +14,9 @@ const ADD_TASK = gql`
 `;
 
 export default function Form() {
-    const [addTask, { data, error }] = useMutation(ADD_TASK);
+    const [addTask, { data, error }] = useMutation(ADD_TASK, {
+        refetchQueries: [{ query: GET_TASKS }]
+    });
     const [formData, setFormData] = useState({
         text: "",
         username: ""
