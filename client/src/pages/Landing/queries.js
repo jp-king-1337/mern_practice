@@ -9,3 +9,13 @@ export const GET_TASKS = gql`
         }
     }
 `;
+
+export const GET_TASK = gql`
+    query GetTask($id: String!) {
+        getTask(id: $id) {
+            _id
+            text
+            username
+        }
+    }
+`;

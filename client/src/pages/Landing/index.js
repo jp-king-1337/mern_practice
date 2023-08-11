@@ -1,9 +1,18 @@
 import { useQuery } from "@apollo/client";
 
-import { GET_TASKS } from "./queries";
+import { GET_TASKS, GET_TASK } from "./queries";
+import { useState } from "react";
 
 export default function Landing() {
+    const [id, setId] = useState("64d6577bd048464a897fcce3");
     const { data, error, loading } = useQuery(GET_TASKS);
+    const { data: getTaskData } = useQuery(GET_TASK, {
+        variables: {
+            id
+        }
+    });
+
+    if (getTaskData) console.log(getTaskData);
 
     return (
         <>
@@ -11,6 +20,14 @@ export default function Landing() {
 
             {/* Kinda cool */}
             {loading && <p>Loading...</p>}
+
+            {error && <p className="error">{error}</p>}
+
+            {
+                <p>{getTaskData?.getTask?.username}</p>
+            }
+
+            <input type="text" placeholder="Enter task id" onChange={e => setId(e.target.value)} />
 
             <div className="tasks">
                 {data?.getTasks.map((task, index) => (

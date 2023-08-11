@@ -11,7 +11,7 @@ module.exports = {
             console.log("Args: ", args);
             // console.log(context);
             const task = await Task.findById(args.id);
-
+            console.log(task);
             return task;
         }
     },
