@@ -1,30 +1,32 @@
-import { useStore } from "../store";
+import { gql, useQuery } from "@apollo/client"
+
+const GET_TASKS = gql`
+query {
+    getTasks {
+        _id
+        text
+        username
+    }
+}
+`;
 
 function Landing() {
-    const { tasks, setGlobalState } = useStore();
+    const { data, error, loading } = useQuery(GET_TASKS);
 
-    const deleteTask = (index) => {
-        const copy = [...tasks];
-        copy.splice(index, 1);
-
-        setGlobalState(oldState => {
-            return {
-                ...oldState,
-                tasks: [...copy]
-            }
-        })
-    };
+    console.log("data: ", data, "error: ", error, "loading: ", loading);
 
     return (
         <>
             <h1>Task Manager</h1>
 
-            <div>
-                {tasks.map((task, index) => (
+            {/* Kinda cool */}
+            {loading && <p>Loading...</p>}
+
+            <div className="tasks">
+                {data?.getTasks.map((task, index) => (
                     <div key={index}>
                         <p>Task: {task.text}</p>
                         <p>Username: {task.username}</p>
-                        <button onClick={() => deleteTask(index)}>Delete</button>
                     </div>
                 ))}
             </div>
