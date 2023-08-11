@@ -18,6 +18,25 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+main header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 3%;
+}
+
+main header nav a {
+    color: #000;
+    text-decoration: none;
+}
+
+main header nav a:not(:last-child) {
+    margin-right: 10px;
+}
+
+main header nav a.active {
+    text-decoration: underline;
+}
 
 main.dark {
     background: #777;
@@ -27,4 +46,3 @@ main.dark {
 .tasks div {
     margin: 10px 0;
 }
-

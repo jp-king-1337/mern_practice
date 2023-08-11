@@ -1,71 +1,51 @@
-import { useReducer } from "react";
-import { useStore } from "../store";
+import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
 
-const initial_state = {
-    taskText: "",
-    username: ""
-};
+import { GET_TASKS } from "./Landing/queries";
 
-const reducer = (state, actionObj) => {
-    switch (actionObj.type) {
-        case "UPDATE_USERNAME":
-            return {
-                ...state,
-                username: actionObj.payload
-            };
-        case "UPDATE_TASK_TEXT":
-            return {
-                ...state,
-                taskText: actionObj.payload
-            }
+const ADD_TASK = gql`
+    mutation AddTask($username: String!, $text: String!) {
+        addTask(username: $username, text: $text) {
+            _id
+            text
+            username
+        }
     }
-};
+`;
 
 export default function Form() {
-    const { setGlobalState } = useStore();
-    const [state, dispatch] = useReducer(reducer, initial_state);
+    const [addTask, { data, error }] = useMutation(ADD_TASK, {
+        refetchQueries: [{ query: GET_TASKS }]
+    });
+    const [formData, setFormData] = useState({
+        text: "",
+        username: ""
+    });
+
+    if (data) console.log(data);
+
+    if (error) console.log(error);
 
     const handleInputChange = e => {
         const prop = e.target.name;
         const value = e.target.value;
 
-        switch (prop) {
-            case "username":
-                dispatch({
-                    type: "UPDATE_USERNAME",
-                    payload: value
-                });
-                break;
-            case "taskText":
-                dispatch({
-                    type: "UPDATE_TASK_TEXT",
-                    payload: value
-                });
-                break;
-        }
-    }
+        setFormData({
+            ...formData,
+            [prop]: value
+        });
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        setGlobalState(oldState => ({
-            ...oldState,
-            tasks: [
-                ...oldState.tasks,
-                {
-                    text: state.taskText,
-                    username: state.username,
-                }
-            ]
-        }));
-
-        dispatch({
-            type: "UPDATE_USERNAME",
-            payload: ""
+        addTask({
+            variables: formData
         });
-        dispatch({
-            type: "UPDATE_TASK_TEXT",
-            payload: ""
+
+        setFormData({
+            text: "",
+            username: "",
         });
     };
 
@@ -73,9 +53,13 @@ export default function Form() {
         <>
             <h1>Add a Task</h1>
 
+            {data && <p>New task with id {data.addTask._id} added successfully!</p>}
+
+            <br />
+
             <form onSubmit={handleSubmit}>
-                <input name="username" value={state.username} type="text" onChange={handleInputChange} placeholder="Enter your username" />
-                <input name="taskText" value={state.taskText} type="text" onChange={handleInputChange} placeholder="Enter your todo text" />
+                <input name="username" value={formData.username} type="text" onChange={handleInputChange} placeholder="Enter your username" />
+                <input name="text" value={formData.text} type="text" onChange={handleInputChange} placeholder="Enter your todo text" />
                 <button>Submit</button>
             </form>
         </>

@@ -26,7 +26,13 @@ async function startServer() {
     app.use(express.json());
     app.use(cors());
     app.use(expressMiddleware(server, {
-        context: async ({ req }) => ({ message: "This is the context!" }),
+        context: async (apollo_request_data) => {
+            return {
+                req: apollo_request_data.req,
+                res: apollo_request_data.res
+            }
+        }
+
     }));
 
     await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
