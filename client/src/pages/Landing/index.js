@@ -24,6 +24,7 @@ export default function Landing() {
             {error && <p className="error">{error}</p>}
 
             {
+                // The second ? wasn't necessary for JD, but for some reason my code needs it
                 <p>{getTaskData?.getTask?.username}</p>
             }
 
