@@ -5,11 +5,20 @@ import App from "./App";
 
 import { StoreProvider } from "./store";
 
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from "@apollo/client";
+
+const client = new ApolloClient({
+    uri: "http://127.0.0.1://3333/graphql",
+    cache: new InMemoryCache(),
+});
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <StoreProvider>
-            <App />
-        </StoreProvider>
+        <ApolloProvider client={client}>
+            <StoreProvider>
+                <App />
+            </StoreProvider>
+        </ApolloProvider>,
     </React.StrictMode>
 );
