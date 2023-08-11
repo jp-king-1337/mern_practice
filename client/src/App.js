@@ -1,19 +1,19 @@
-import { Routes, Route } from "react-router-dom";
-import { useStore } from "./store";
+import { Routes, Route } from 'react-router-dom';
 
-import Landing from "./pages/Landing";
-import Form from "./pages/Form";
+import Header from './components/Header';
 
+import Landing from './pages/Landing';
+import Form from './pages/Form';
 
-function App() {
+export default function App() {
     return (
         <main>
+            <Header />
+
             <Routes>
                 <Route path="/" element={<Landing />} />
-                <Route path="/form" element={< Form />} />
+                <Route path="/form" element={<Form />} />
             </Routes>
         </main>
     );
 }
-
-export default App;

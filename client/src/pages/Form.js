@@ -12,9 +12,9 @@ const ADD_TASK = gql`
 `;
 
 export default function Form() {
-    const [addTask, { data, error }] = useMutation;
+    const [addTask, { data, error }] = useMutation(ADD_TASK);
     const [formData, setFormData] = useState({
-        taskText: "",
+        text: "",
         username: ""
     });
 
@@ -40,7 +40,7 @@ export default function Form() {
         });
 
         setFormData({
-            taskText: "",
+            text: "",
             username: "",
         });
     };
@@ -49,9 +49,13 @@ export default function Form() {
         <>
             <h1>Add a Task</h1>
 
+            {data && <p>New task with id {data.addTask._id} added successfully!</p>}
+
+            <br />
+
             <form onSubmit={handleSubmit}>
                 <input name="username" value={formData.username} type="text" onChange={handleInputChange} placeholder="Enter your username" />
-                <input name="taskText" value={formData.taskText} type="text" onChange={handleInputChange} placeholder="Enter your todo text" />
+                <input name="text" value={formData.text} type="text" onChange={handleInputChange} placeholder="Enter your todo text" />
                 <button>Submit</button>
             </form>
         </>
