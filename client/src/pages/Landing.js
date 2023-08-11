@@ -1,5 +1,4 @@
-import { gql, useQuery } from "@apollo/client"
-import { useEffect } from "react";
+import { gql, useQuery } from "@apollo/client";
 
 const GET_TASKS = gql`
 query {
@@ -11,12 +10,8 @@ query {
 }
 `;
 
-function Landing() {
+export default function Landing() {
     const { data, error, loading, refetch } = useQuery(GET_TASKS);
-
-    useEffect(() => {
-        refetch();
-    }, [data]);
 
     return (
         <>
@@ -36,5 +31,3 @@ function Landing() {
         </>
     )
 }
-
-export default Landing;
