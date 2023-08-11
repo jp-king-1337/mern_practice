@@ -8,8 +8,10 @@ import Form from "./pages/Form";
 function App() {
     return (
         <main>
-            <Route path="/" element={<Landing />} />
-            <Route path="/form" element={< Form />} />
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/form" element={< Form />} />
+            </Routes>
         </main>
     );
 }
