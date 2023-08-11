@@ -14,7 +14,7 @@ const ADD_TASK = gql`
 `;
 
 export default function Form() {
-    const [addTask, { data, error}] = useMutation(ADD_TASK, {
+    const [addTask, { data, error }] = useMutation(ADD_TASK, {
         refetchQueries: [{ query: GET_TASKS }]
     });
     const [formData, setFormData] = useState({
